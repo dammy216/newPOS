@@ -41,5 +41,11 @@ namespace POS
             var sales = new Seles();
             sales.ShowDialog();
         }
+
+        private void salesStatusButton_Click(object sender, EventArgs e)
+        {
+            var status = new TotalSales();
+            status.ShowDialog();
+        }
     }
 }

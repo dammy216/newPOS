@@ -56,30 +56,33 @@ namespace POS.Model.Managers
             return salledTodayPrice;
         }
 
-        public void SellesFromStock(List<StockData> stockDatas, List<CartData> cartDatas)
+        public string[] DisplayTodaySalesStatus(SalledData sales)
         {
-            foreach (var cartData in cartDatas)
-            {
-                // 対応するStockDataを探す（ここではProductNameを基準にする）
-                var correspondingStock = stockDatas.Where(s => s.PurchaseName == cartData.ProductName);
+            string today = DateTime.Today.ToString("yyyy-MM-dd");
 
-                if (correspondingStock.Any())
-                {
-                    // StockDataのAmountからCartDataのAmountを引く
-                    foreach (var stock in correspondingStock)
-                    {
-                        stock.StockAmount -= cartData.AddproductAmount;
-                    }
-                }
-                else
-                {
-                    // エラー処理またはログ出力など
-                    Console.WriteLine($"CartDataに対応するStockDataが見つかりませんでした。 CartData Id:");
-                    // 必要に応じてエラー処理を追加する
-                }
+            string[] salesItems = null;
+            if(sales.SalledDate == today)
+            {
+                var name = sales.SalledProductName;
+                var price = sales.SalledPrice.ToString();
+                var amount = sales.SalledAmount.ToString();
+                var subTotal = sales.SalledSubTotal.ToString();
+
+                salesItems = new string[] { name, price, amount, subTotal };
             }
+            return salesItems;
         }
 
+        public string[] DisplayTotalSalesStatus(SalledData sales)
+        {
+            var name = sales.SalledProductName;
+            var price = sales.SalledPrice.ToString();
+            var amount = sales.SalledAmount.ToString();
+            var subTotal = sales.SalledSubTotal.ToString();
+
+            string[] salesItems = {name,  price, amount, subTotal};
+            return salesItems;
+        }
     }
 }
 

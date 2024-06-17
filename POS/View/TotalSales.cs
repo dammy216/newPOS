@@ -1,4 +1,5 @@
-﻿using System;
+﻿using POS.Model.Managers;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -12,9 +13,29 @@ namespace POS.View
 {
     public partial class TotalSales : Form
     {
+        private SelesManager _selesInstance = SelesManager.GetInstance();
+
         public TotalSales()
         {
             InitializeComponent();
+            DisplayTotalSelesListView();
+        }
+
+        private void DisplayTotalSelesListView()
+        {
+            totalSalesListView.Items.Clear();
+
+            foreach (var sales in _selesInstance.SalledList)
+            {
+                var selesList = _selesInstance.DisplayTotalSalesStatus(sales);
+
+                if (selesList == null)
+                    continue;
+
+                ListViewItem item = new ListViewItem(selesList);
+
+                totalSalesListView.Items.Add(item);
+            }
         }
     }
 }

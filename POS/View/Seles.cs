@@ -14,7 +14,6 @@ namespace POS.View
     public partial class Seles : Form
     {
         private StockManager _stockInstance = StockManager.GetInstance();
-        private CartManager _cartInstance = CartManager.GetInstance();
         private SelesManager _selesInstance = SelesManager.GetInstance();
         public Seles()
         {
@@ -39,65 +38,43 @@ namespace POS.View
             }
         }
 
-        private void addButton_Click(object sender, EventArgs e)
+        private void buyButton_Click(object sender, EventArgs e)
         {
-            if (_cartInstance.IsSelectItem(salesListView.SelectedItems.Count))
+            if(salesListView.SelectedItems.Count == 0)
             {
                 messageText.ForeColor = Color.Red;
                 messageText.Text = "商品が選択されていません";
                 return;
             }
-
-            var name = salesListView.SelectedItems[0].Text;
-            var amount = (int)amountNB.Value;
-
-            if (_cartInstance.IsZero(amount))
+            else if(amountNB.Value == 0)
             {
                 messageText.ForeColor = Color.Red;
                 messageText.Text = "0の値があります";
                 return;
             }
-
-            if (_cartInstance.AddCart(name, amount))
-            {
-                messageText.ForeColor = Color.Red;
-                messageText.Text = "その商品はカートに入っています";
-            }
             else
             {
                 messageText.ForeColor = Color.Green;
-                messageText.Text = "カートに入れました！";
-            }
+                messageText.Text = "商品を購入しました！";
 
-            DisplayCartListView();
-            amountNB.Value = 0;
+                var name = salesListView.SelectedItems[0].Text;
+                int.TryParse(salesListView.SelectedItems[0].SubItems[1].Text, out var price);
+                var amount = (int)amountNB.Value;
+
+                _selesInstance.AddSeles(name, price, amount);
+                _stockInstance.SellesFromStock(name, amount);
+
+                DisplaySelesListView();
+                amountNB.Value = 0;
+            };
         }
 
-        private void DisplayCartListView()
+        private void amountNB_ValueChanged(object sender, EventArgs e)
         {
-            cartListView.Items.Clear();
-
-            foreach (var cartItem in _cartInstance.CartList)
+            if (amountNB.Value < 0)
             {
-                var cartList = _cartInstance.DisplayCartList(cartItem);
-
-                if (cartList == null)
-                    continue;
-
-                ListViewItem item = new ListViewItem(cartList);
-
-                cartListView.Items.Add(item);
+                amountNB.Value = 0;
             }
-        }
-
-        private void buyButton_Click(object sender, EventArgs e)
-        {
-            cartListView.Items.Clear();
-
-            var stockList = _stockInstance.StockList;
-            var cartList = _cartInstance.CartList;
-            _selesInstance.SellesFromStock(stockList, cartList);
-            DisplaySelesListView();
         }
     }
 }

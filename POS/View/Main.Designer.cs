@@ -41,7 +41,7 @@
             this.subscribeButton = new System.Windows.Forms.Button();
             this.PurchaseButton = new System.Windows.Forms.Button();
             this.stockButton = new System.Windows.Forms.Button();
-            this.button5 = new System.Windows.Forms.Button();
+            this.salesStatusButton = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // label1
@@ -155,21 +155,22 @@
             this.stockButton.UseVisualStyleBackColor = true;
             this.stockButton.Click += new System.EventHandler(this.stockButton_Click);
             // 
-            // button5
+            // salesStatusButton
             // 
-            this.button5.Location = new System.Drawing.Point(85, 326);
-            this.button5.Name = "button5";
-            this.button5.Size = new System.Drawing.Size(75, 23);
-            this.button5.TabIndex = 9;
-            this.button5.Text = "販売集計";
-            this.button5.UseVisualStyleBackColor = true;
+            this.salesStatusButton.Location = new System.Drawing.Point(85, 326);
+            this.salesStatusButton.Name = "salesStatusButton";
+            this.salesStatusButton.Size = new System.Drawing.Size(75, 23);
+            this.salesStatusButton.TabIndex = 9;
+            this.salesStatusButton.Text = "販売集計";
+            this.salesStatusButton.UseVisualStyleBackColor = true;
+            this.salesStatusButton.Click += new System.EventHandler(this.salesStatusButton_Click);
             // 
             // Main
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
-            this.Controls.Add(this.button5);
+            this.Controls.Add(this.salesStatusButton);
             this.Controls.Add(this.stockButton);
             this.Controls.Add(this.PurchaseButton);
             this.Controls.Add(this.subscribeButton);
@@ -201,7 +202,7 @@
         private System.Windows.Forms.Button subscribeButton;
         private System.Windows.Forms.Button PurchaseButton;
         private System.Windows.Forms.Button stockButton;
-        private System.Windows.Forms.Button button5;
+        private System.Windows.Forms.Button salesStatusButton;
     }
 }
 

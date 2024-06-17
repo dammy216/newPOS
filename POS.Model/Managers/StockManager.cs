@@ -1,6 +1,7 @@
 ﻿using POS.Model.Model;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.InteropServices;
 
 namespace POS.Model.Managers
 {
@@ -52,9 +53,10 @@ namespace POS.Model.Managers
                 return null;
 
             var name = selesItem.PurchaseName;
+            var price = selesItem.PurchasePrice.ToString();
             var amount = selesItem.StockAmount.ToString();
 
-            string[] selesItems = { name, amount };
+            string[] selesItems = { name, price, amount };
             return selesItems;
         }
 
@@ -72,6 +74,19 @@ namespace POS.Model.Managers
                 return true;
 
             return false;
+        }
+
+        public void SellesFromStock(string selectItemName, int amount)
+        {
+            if (amount < 0)
+                return;
+
+            var sameName = _stockList.FirstOrDefault(item => item.PurchaseName == selectItemName);
+
+            if (sameName == null || sameName.StockAmount < amount)
+                return;
+
+            sameName.StockAmount -= amount;
         }
     }
 }

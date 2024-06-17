@@ -28,7 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.listView1 = new System.Windows.Forms.ListView();
+            this.totalSalesListView = new System.Windows.Forms.ListView();
             this.columnHeader1 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.columnHeader2 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.columnHeader3 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
@@ -39,20 +39,20 @@
             this.label4 = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
-            // listView1
+            // totalSalesListView
             // 
-            this.listView1.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
+            this.totalSalesListView.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
             this.columnHeader1,
             this.columnHeader2,
             this.columnHeader3,
             this.columnHeader4});
-            this.listView1.HideSelection = false;
-            this.listView1.Location = new System.Drawing.Point(42, 63);
-            this.listView1.Name = "listView1";
-            this.listView1.Size = new System.Drawing.Size(468, 295);
-            this.listView1.TabIndex = 5;
-            this.listView1.UseCompatibleStateImageBehavior = false;
-            this.listView1.View = System.Windows.Forms.View.Details;
+            this.totalSalesListView.HideSelection = false;
+            this.totalSalesListView.Location = new System.Drawing.Point(42, 63);
+            this.totalSalesListView.Name = "totalSalesListView";
+            this.totalSalesListView.Size = new System.Drawing.Size(468, 295);
+            this.totalSalesListView.TabIndex = 5;
+            this.totalSalesListView.UseCompatibleStateImageBehavior = false;
+            this.totalSalesListView.View = System.Windows.Forms.View.Details;
             // 
             // columnHeader1
             // 
@@ -119,7 +119,7 @@
             this.Controls.Add(this.label3);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
-            this.Controls.Add(this.listView1);
+            this.Controls.Add(this.totalSalesListView);
             this.Name = "TotalSales";
             this.Text = "TotalSales";
             this.ResumeLayout(false);
@@ -129,7 +129,7 @@
 
         #endregion
 
-        private System.Windows.Forms.ListView listView1;
+        private System.Windows.Forms.ListView totalSalesListView;
         private System.Windows.Forms.ColumnHeader columnHeader1;
         private System.Windows.Forms.ColumnHeader columnHeader2;
         private System.Windows.Forms.ColumnHeader columnHeader3;
