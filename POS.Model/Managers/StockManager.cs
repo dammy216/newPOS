@@ -53,7 +53,7 @@ namespace POS.Model.Managers
                 return null;
 
             var name = selesItem.PurchaseName;
-            var price = selesItem.PurchasePrice.ToString();
+            var price = selesItem.SallesPrice.ToString();
             var amount = selesItem.StockAmount.ToString();
 
             string[] selesItems = { name, price, amount };

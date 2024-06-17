@@ -29,10 +29,10 @@
         private void InitializeComponent()
         {
             this.label1 = new System.Windows.Forms.Label();
-            this.label2 = new System.Windows.Forms.Label();
+            this.totalPriceLabel = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
-            this.listView1 = new System.Windows.Forms.ListView();
+            this.todaySalesListView = new System.Windows.Forms.ListView();
             this.columnHeader1 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.columnHeader2 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.columnHeader3 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
@@ -53,14 +53,14 @@
             this.label1.TabIndex = 0;
             this.label1.Text = "売上合計金額";
             // 
-            // label2
+            // totalPriceLabel
             // 
-            this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(314, 374);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(11, 12);
-            this.label2.TabIndex = 1;
-            this.label2.Text = "0";
+            this.totalPriceLabel.AutoSize = true;
+            this.totalPriceLabel.Location = new System.Drawing.Point(314, 374);
+            this.totalPriceLabel.Name = "totalPriceLabel";
+            this.totalPriceLabel.Size = new System.Drawing.Size(11, 12);
+            this.totalPriceLabel.TabIndex = 1;
+            this.totalPriceLabel.Text = "0";
             // 
             // label3
             // 
@@ -80,20 +80,20 @@
             this.label4.TabIndex = 3;
             this.label4.Text = "利益合計金額";
             // 
-            // listView1
+            // todaySalesListView
             // 
-            this.listView1.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
+            this.todaySalesListView.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
             this.columnHeader1,
             this.columnHeader2,
             this.columnHeader3,
             this.columnHeader4});
-            this.listView1.HideSelection = false;
-            this.listView1.Location = new System.Drawing.Point(283, 70);
-            this.listView1.Name = "listView1";
-            this.listView1.Size = new System.Drawing.Size(443, 215);
-            this.listView1.TabIndex = 4;
-            this.listView1.UseCompatibleStateImageBehavior = false;
-            this.listView1.View = System.Windows.Forms.View.Details;
+            this.todaySalesListView.HideSelection = false;
+            this.todaySalesListView.Location = new System.Drawing.Point(283, 70);
+            this.todaySalesListView.Name = "todaySalesListView";
+            this.todaySalesListView.Size = new System.Drawing.Size(443, 215);
+            this.todaySalesListView.TabIndex = 4;
+            this.todaySalesListView.UseCompatibleStateImageBehavior = false;
+            this.todaySalesListView.View = System.Windows.Forms.View.Details;
             // 
             // columnHeader1
             // 
@@ -175,10 +175,10 @@
             this.Controls.Add(this.PurchaseButton);
             this.Controls.Add(this.subscribeButton);
             this.Controls.Add(this.sallesButton);
-            this.Controls.Add(this.listView1);
+            this.Controls.Add(this.todaySalesListView);
             this.Controls.Add(this.label4);
             this.Controls.Add(this.label3);
-            this.Controls.Add(this.label2);
+            this.Controls.Add(this.totalPriceLabel);
             this.Controls.Add(this.label1);
             this.Name = "Main";
             this.Text = "main";
@@ -190,10 +190,10 @@
         #endregion
 
         private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.Label totalPriceLabel;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label label4;
-        private System.Windows.Forms.ListView listView1;
+        private System.Windows.Forms.ListView todaySalesListView;
         private System.Windows.Forms.ColumnHeader columnHeader1;
         private System.Windows.Forms.ColumnHeader columnHeader2;
         private System.Windows.Forms.ColumnHeader columnHeader3;

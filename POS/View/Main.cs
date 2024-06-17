@@ -1,4 +1,5 @@
-﻿using POS.View;
+﻿using POS.Model.Managers;
+using POS.View;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -13,9 +14,28 @@ namespace POS
 {
     public partial class Main : Form
     {
+        private SelesManager _selesInstance = SelesManager.GetInstance();
+
         public Main()
         {
             InitializeComponent();
+            DisplayTodaySelesListView();
+        }
+        private void DisplayTodaySelesListView()
+        {
+            todaySalesListView.Items.Clear();
+
+            foreach (var sales in _selesInstance.SalledList)
+            {
+                var selesList = _selesInstance.DisplayTodaySalesStatus(sales);
+
+                if (selesList == null)
+                    continue;
+
+                ListViewItem item = new ListViewItem(selesList);
+
+                todaySalesListView.Items.Add(item);
+            }
         }
 
         private void subscribeButton_Click(object sender, EventArgs e)
@@ -39,7 +59,11 @@ namespace POS
         private void sallesButton_Click(object sender, EventArgs e)
         {
             var sales = new Seles();
-            sales.ShowDialog();
+            if (sales.ShowDialog() == DialogResult.OK)
+            {
+                DisplayTodaySelesListView();
+                totalPriceLabel.Text = _selesInstance.CalcSelledTodayPrice().ToString();
+            }
         }
 
         private void salesStatusButton_Click(object sender, EventArgs e)

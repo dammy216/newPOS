@@ -83,18 +83,31 @@ namespace POS.Model.Managers
             string[] salesItems = {name,  price, amount, subTotal};
             return salesItems;
         }
+
+        public int CalcProfitTotalPrice()
+        {
+            var stockInstance = StockManager.GetInstance();
+            var purchaseSubTotal = 0;
+
+            foreach(var sales in _salledList)
+            {
+                var sameName = stockInstance.StockList.FirstOrDefault(item => item.PurchaseName == sales.SalledProductName);
+
+                if (sameName == null)
+                    continue;
+
+                purchaseSubTotal += sameName.PurchasePrice * sales.SalledAmount;
+
+            }
+            var profit = CalcSalledTotalPrice() - purchaseSubTotal;
+            return profit;
+        }
     }
 }
 
 
         //利益の計算メソッドはどのクラスに作るか問題解決まで放置-------------------------------------
-        //public int CalcProfitTotalPrice()
-        //{
-        //    var stockManager = new StockManager();
-        //    var stockList = stockManager.StockList;
-
-        //    if(stockList.Any(item => item.Name == _salledList.N)
-        //}
+        
         //--------------------------------------------------------------------------------------------
 
         

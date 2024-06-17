@@ -34,8 +34,8 @@
             this.columnHeader3 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.columnHeader4 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.label1 = new System.Windows.Forms.Label();
-            this.label2 = new System.Windows.Forms.Label();
-            this.label3 = new System.Windows.Forms.Label();
+            this.totalPriceLabel = new System.Windows.Forms.Label();
+            this.totalProfitLabel = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
@@ -83,23 +83,23 @@
             this.label1.TabIndex = 6;
             this.label1.Text = "総売上金額";
             // 
-            // label2
+            // totalPriceLabel
             // 
-            this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(594, 131);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(11, 12);
-            this.label2.TabIndex = 7;
-            this.label2.Text = "0";
+            this.totalPriceLabel.AutoSize = true;
+            this.totalPriceLabel.Location = new System.Drawing.Point(594, 131);
+            this.totalPriceLabel.Name = "totalPriceLabel";
+            this.totalPriceLabel.Size = new System.Drawing.Size(11, 12);
+            this.totalPriceLabel.TabIndex = 7;
+            this.totalPriceLabel.Text = "0";
             // 
-            // label3
+            // totalProfitLabel
             // 
-            this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(594, 251);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(11, 12);
-            this.label3.TabIndex = 8;
-            this.label3.Text = "0";
+            this.totalProfitLabel.AutoSize = true;
+            this.totalProfitLabel.Location = new System.Drawing.Point(594, 251);
+            this.totalProfitLabel.Name = "totalProfitLabel";
+            this.totalProfitLabel.Size = new System.Drawing.Size(11, 12);
+            this.totalProfitLabel.TabIndex = 8;
+            this.totalProfitLabel.Text = "0";
             // 
             // label4
             // 
@@ -116,8 +116,8 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
             this.Controls.Add(this.label4);
-            this.Controls.Add(this.label3);
-            this.Controls.Add(this.label2);
+            this.Controls.Add(this.totalProfitLabel);
+            this.Controls.Add(this.totalPriceLabel);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.totalSalesListView);
             this.Name = "TotalSales";
@@ -135,8 +135,8 @@
         private System.Windows.Forms.ColumnHeader columnHeader3;
         private System.Windows.Forms.ColumnHeader columnHeader4;
         private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.Label totalPriceLabel;
+        private System.Windows.Forms.Label totalProfitLabel;
         private System.Windows.Forms.Label label4;
     }
 }

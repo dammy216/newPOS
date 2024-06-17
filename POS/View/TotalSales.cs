@@ -19,6 +19,8 @@ namespace POS.View
         {
             InitializeComponent();
             DisplayTotalSelesListView();
+            totalPriceLabel.Text = _selesInstance.CalcSalledTotalPrice().ToString();
+            totalProfitLabel.Text = _selesInstance.CalcProfitTotalPrice().ToString();
         }
 
         private void DisplayTotalSelesListView()

@@ -65,16 +65,9 @@ namespace POS.View
                 _stockInstance.SellesFromStock(name, amount);
 
                 DisplaySelesListView();
+                DialogResult = DialogResult.OK;
                 amountNB.Value = 0;
             };
-        }
-
-        private void amountNB_ValueChanged(object sender, EventArgs e)
-        {
-            if (amountNB.Value < 0)
-            {
-                amountNB.Value = 0;
-            }
         }
     }
 }

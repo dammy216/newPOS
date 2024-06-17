@@ -80,6 +80,11 @@
             // purchasePriceNB
             // 
             this.purchasePriceNB.Location = new System.Drawing.Point(287, 155);
+            this.purchasePriceNB.Maximum = new decimal(new int[] {
+            1000000,
+            0,
+            0,
+            0});
             this.purchasePriceNB.Name = "purchasePriceNB";
             this.purchasePriceNB.Size = new System.Drawing.Size(120, 19);
             this.purchasePriceNB.TabIndex = 3;
@@ -87,6 +92,11 @@
             // SellesPriceNB
             // 
             this.SellesPriceNB.Location = new System.Drawing.Point(287, 240);
+            this.SellesPriceNB.Maximum = new decimal(new int[] {
+            1000000,
+            0,
+            0,
+            0});
             this.SellesPriceNB.Name = "SellesPriceNB";
             this.SellesPriceNB.RightToLeft = System.Windows.Forms.RightToLeft.No;
             this.SellesPriceNB.Size = new System.Drawing.Size(120, 19);

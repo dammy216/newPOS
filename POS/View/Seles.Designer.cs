@@ -74,7 +74,6 @@
             this.amountNB.Name = "amountNB";
             this.amountNB.Size = new System.Drawing.Size(120, 19);
             this.amountNB.TabIndex = 1;
-            this.amountNB.ValueChanged += new System.EventHandler(this.amountNB_ValueChanged);
             // 
             // label1
             // 
