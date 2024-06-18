@@ -8,18 +8,16 @@ namespace POS.Model.Model
 {
     public class SalledData
     {
-        public string SalledProductName {  get; set; }
-        public int SalledPrice { get; set; }
+        public StockData StockData { get; set; }
         public int SalledAmount {  get; set; }
         public int SalledSubTotal {  get; set; }
         public string SalledDate { get; set; }
 
-        public SalledData(string salledProductName, int salledPrice, int salledAmount, int salledSubTotal)
+        public SalledData(StockData stockData, int salledAmount)
         {
-            SalledProductName = salledProductName;
-            SalledPrice = salledPrice;
+            StockData = stockData;
             SalledAmount = salledAmount;
-            SalledSubTotal = salledSubTotal;
+            SalledSubTotal = stockData.SallesPrice * salledAmount;
             SalledDate = DateTime.Today.ToString("yyyy-MM-dd");
         }
 

@@ -58,10 +58,9 @@ namespace POS.View
                 messageText.Text = "商品を購入しました！";
 
                 var name = salesListView.SelectedItems[0].Text;
-                int.TryParse(salesListView.SelectedItems[0].SubItems[1].Text, out var price);
                 var amount = (int)amountNB.Value;
 
-                _selesInstance.AddSeles(name, price, amount);
+                _selesInstance.AddSeles(_stockInstance.GetStockData(salesListView.SelectedItems[0].Index), amount);
                 _stockInstance.SellesFromStock(name, amount);
 
                 DisplaySelesListView();

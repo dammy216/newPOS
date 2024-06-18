@@ -25,19 +25,20 @@ namespace POS.Model.Managers
             return _instance;
         }
 
-        public bool AddStock(string stockName, int stockAmount, int purchasePrice, int sallesPrice)
+        public bool IsAddStock(string stockName, int stockAmount, int purchasePrice, int sallesPrice)
         {
-            if(_stockList.Any(item => item.PurchaseName == stockName && item.StockAmount > 0))
+            if(_stockList.Any(item => item.StockProductData.ProductName == stockName && item.StockAmount > 0))
                 return true;
-            
-            var stockData = new StockData(stockName, stockAmount, purchasePrice, sallesPrice);
+
+            var productData = new ProductData(stockName);
+            var stockData = new StockData(productData, stockAmount, purchasePrice, sallesPrice);
             _stockList.Add(stockData);
             return false;
         }
 
         public string[] DisplayStockList(StockData stock)
         {
-            var name = stock.PurchaseName;
+            var name = stock.StockProductData.ProductName;
             var date = stock.PurchaseDate.ToString();
             var purchasePrice = stock.PurchasePrice.ToString();
             var sallesPrice = stock.SallesPrice.ToString();
@@ -52,7 +53,7 @@ namespace POS.Model.Managers
             if (selesItem.StockAmount == 0)
                 return null;
 
-            var name = selesItem.PurchaseName;
+            var name = selesItem.StockProductData.ProductName;
             var price = selesItem.SallesPrice.ToString();
             var amount = selesItem.StockAmount.ToString();
 
@@ -81,12 +82,17 @@ namespace POS.Model.Managers
             if (amount < 0)
                 return;
 
-            var sameName = _stockList.FirstOrDefault(item => item.PurchaseName == selectItemName);
+            var sameName = _stockList.FirstOrDefault(item => item.StockProductData.ProductName == selectItemName);
 
             if (sameName == null || sameName.StockAmount < amount)
                 return;
 
             sameName.StockAmount -= amount;
+        }
+
+        public StockData GetStockData(int index)
+        {
+            return _stockList[index];
         }
     }
 }

@@ -27,17 +27,10 @@ namespace POS.Model.Managers
             return _instance;
         }
 
-        public void AddSeles(string salledName, int salledPrice, int salledAmount)
+        public void AddSeles(StockData stockData, int salledAmount)
         {
-            var salledData = new SalledData(salledName, salledPrice, salledAmount, CalcSubTotal(salledPrice, salledAmount));
+            var salledData = new SalledData(stockData, salledAmount);
             _salledList.Add(salledData);
-        }
-
-        //販売数×価格の計算
-        private int CalcSubTotal(int salledPrice, int salledAmount)
-        {
-            int subTotal = salledPrice * salledAmount;
-            return subTotal;
         }
 
         //"総"売り上げ金額を求める
@@ -63,8 +56,8 @@ namespace POS.Model.Managers
             string[] salesItems = null;
             if(sales.SalledDate == today)
             {
-                var name = sales.SalledProductName;
-                var price = sales.SalledPrice.ToString();
+                var name = sales.StockData.StockProductData.ProductName;
+                var price = sales.StockData.SallesPrice.ToString();
                 var amount = sales.SalledAmount.ToString();
                 var subTotal = sales.SalledSubTotal.ToString();
 
@@ -75,8 +68,8 @@ namespace POS.Model.Managers
 
         public string[] DisplayTotalSalesStatus(SalledData sales)
         {
-            var name = sales.SalledProductName;
-            var price = sales.SalledPrice.ToString();
+            var name = sales.StockData.StockProductData.ProductName;
+            var price = sales.StockData.SallesPrice.ToString();
             var amount = sales.SalledAmount.ToString();
             var subTotal = sales.SalledSubTotal.ToString();
 
@@ -86,29 +79,18 @@ namespace POS.Model.Managers
 
         public int CalcProfitTotalPrice()
         {
-            var stockInstance = StockManager.GetInstance();
-            var purchaseSubTotal = 0;
+            var purchaseSubTotal = _salledList.Sum(item => item.StockData.PurchasePrice * item.SalledAmount);
+            return CalcSalledTotalPrice() - purchaseSubTotal;
+        }
 
-            foreach(var sales in _salledList)
-            {
-                var sameName = stockInstance.StockList.FirstOrDefault(item => item.PurchaseName == sales.SalledProductName);
-
-                if (sameName == null)
-                    continue;
-
-                purchaseSubTotal += sameName.PurchasePrice * sales.SalledAmount;
-
-            }
-            var profit = CalcSalledTotalPrice() - purchaseSubTotal;
-            return profit;
+        public int CalcProfitTodayTotalPrice()
+        {
+            var today = DateTime.Today.ToString("yyyy-MM-dd");
+            var purchaseSubTotal = _salledList.Where(item => item.SalledDate == today).Sum(item => item.StockData.PurchasePrice * item.SalledAmount);
+            return CalcSelledTodayPrice() - purchaseSubTotal;
         }
     }
 }
-
-
-        //利益の計算メソッドはどのクラスに作るか問題解決まで放置-------------------------------------
-        
-        //--------------------------------------------------------------------------------------------
 
         
 

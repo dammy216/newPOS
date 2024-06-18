@@ -60,7 +60,7 @@ namespace POS.View
                 return;
             }
 
-            if (_stockInstance.AddStock(name, amount, purchasePrice, sellesPrice))
+            if (_stockInstance.IsAddStock(name, amount, purchasePrice, sellesPrice))
             {
                 messageText.ForeColor = Color.Red;
                 messageText.Text = "その商品は在庫が存在しています";
