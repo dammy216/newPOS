@@ -47,6 +47,7 @@
             // 
             this.productNameListView.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
             this.columnHeader1});
+            this.productNameListView.FullRowSelect = true;
             this.productNameListView.HideSelection = false;
             this.productNameListView.Location = new System.Drawing.Point(70, 63);
             this.productNameListView.Name = "productNameListView";

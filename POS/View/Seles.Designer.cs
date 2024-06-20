@@ -45,6 +45,7 @@
             this.columnHeader1,
             this.columnHeader2,
             this.columnHeader3});
+            this.salesListView.FullRowSelect = true;
             this.salesListView.HideSelection = false;
             this.salesListView.Location = new System.Drawing.Point(12, 79);
             this.salesListView.Name = "salesListView";

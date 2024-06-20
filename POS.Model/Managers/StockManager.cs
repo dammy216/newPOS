@@ -25,15 +25,11 @@ namespace POS.Model.Managers
             return _instance;
         }
 
-        public bool IsAddStock(string stockName, int stockAmount, int purchasePrice, int sallesPrice)
+        public void AddStock(string stockName, int stockAmount, int purchasePrice, int sallesPrice)
         {
-            if(_stockList.Any(item => item.StockProductData.ProductName == stockName && item.StockAmount > 0))
-                return true;
-
             var productData = new ProductData(stockName);
             var stockData = new StockData(productData, stockAmount, purchasePrice, sallesPrice);
             _stockList.Add(stockData);
-            return false;
         }
 
         public string[] DisplayStockList(StockData stock)
@@ -48,6 +44,7 @@ namespace POS.Model.Managers
             return stocks;
         }
 
+        //販売画面の表示用
         public string[] DisplaySelesList(StockData selesItem)
         {
             if (selesItem.StockAmount == 0)
@@ -77,12 +74,12 @@ namespace POS.Model.Managers
             return false;
         }
 
-        public void SellesFromStock(string selectItemName, int amount)
+        public void SellesFromStock(StockData stockData, int amount)
         {
             if (amount < 0)
                 return;
 
-            var sameName = _stockList.FirstOrDefault(item => item.StockProductData.ProductName == selectItemName);
+            var sameName = _stockList.FirstOrDefault(item => item == stockData);
 
             if (sameName == null || sameName.StockAmount < amount)
                 return;

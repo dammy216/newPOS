@@ -60,20 +60,13 @@ namespace POS.View
                 return;
             }
 
-            if (_stockInstance.IsAddStock(name, amount, purchasePrice, sellesPrice))
-            {
-                messageText.ForeColor = Color.Red;
-                messageText.Text = "その商品は在庫が存在しています";
-            }
-            else
-            {
+                _stockInstance.AddStock(name, amount, purchasePrice, sellesPrice);
                 messageText.ForeColor = Color.Green;
                 messageText.Text = "在庫に追加しました!";
-            }
-
-            amountNB.Value = 0;
-            purchasePriceNB.Value = 0;
-            SellesPriceNB.Value = 0;
+            
+                amountNB.Value = 0;
+                purchasePriceNB.Value = 0;
+                SellesPriceNB.Value = 0;
         }
 
         
