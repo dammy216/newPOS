@@ -27,48 +27,18 @@ namespace POS.View
         {
             salesListView.Items.Clear();
 
-            // 一時的なリストを用意して重複をチェック
-            List<string[]> uniqueItems = new List<string[]>();
-
-            foreach (var stock in _stockInstance.StockList)
+            foreach (var stock in _stockInstance.UniqueList)
             {
                 var selesList = _stockInstance.DisplaySelesList(stock);
 
                 if (selesList == null)
                     continue;
 
-                string name = selesList[0];
-                string price = selesList[1];
-                string amount = selesList[2];
-
-                // 名前と値段が一致するアイテムが既に存在するかチェック
-                bool isDuplicate = false;
-                foreach (var item in uniqueItems)
-                {
-                    if (item[0] == name && item[1] == price)
-                    {
-                        // 既存のアイテムが見つかった場合、amountを増やしてフラグを立てる
-                        int currentAmount = int.Parse(item[2]);
-                        currentAmount++;
-                        item[2] = currentAmount.ToString();
-                        isDuplicate = true;
-                        break;
-                    }
-                }
-
-                if (!isDuplicate)
-                {
-                    // 重複していない場合は一時リストに追加
-                    uniqueItems.Add(selesList);
-                }
-            }
-
-            foreach (var selesList in uniqueItems)
-            {
                 ListViewItem item = new ListViewItem(selesList);
                 salesListView.Items.Add(item);
             }
         }
+
 
         private void buyButton_Click(object sender, EventArgs e)
         {

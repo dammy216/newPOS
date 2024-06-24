@@ -8,7 +8,9 @@ namespace POS.Model.Managers
     public class StockManager
     {
         private List<StockData> _stockList = new List<StockData>();
+        private List<StockData> _uniqueStockList = new List<StockData>();
         public List<StockData> StockList { get { return _stockList; } }
+        public List<StockData> UniqueList {  get { return _uniqueStockList; } }
         private static StockManager _instance;
 
         private StockManager()
@@ -25,11 +27,29 @@ namespace POS.Model.Managers
             return _instance;
         }
 
+        //重複可能なストックリストに格納する
         public void AddStock(string stockName, int stockAmount, int purchasePrice, int sallesPrice)
         {
             var productData = new ProductData(stockName);
             var stockData = new StockData(productData, stockAmount, purchasePrice, sallesPrice);
             _stockList.Add(stockData);
+        }
+
+        //重複不可能なストックリストに格納する
+        public void AddUniqueStock(string stockName, int stockAmount, int purchasePrice, int sallesPrice)
+        {
+            var sameProduct = _uniqueStockList.FirstOrDefault(item => item.StockProductData.ProductName == stockName && item.SallesPrice == sallesPrice);
+
+            if(sameProduct == null)
+            {
+                var productData = new ProductData(stockName);
+                var stockData = new StockData(productData, stockAmount, purchasePrice, sallesPrice);
+                _uniqueStockList.Add(stockData);
+            }
+            else
+            {
+                sameProduct.StockAmount += stockAmount;
+            }
         }
 
         public string[] DisplayStockList(StockData stock)
@@ -79,12 +99,14 @@ namespace POS.Model.Managers
             if (amount < 0)
                 return;
 
-            var sameName = _stockList.FirstOrDefault(item => item == stockData);
+            var sameStockName = _stockList.FirstOrDefault(item => item == stockData);
+            var sameUniqueStockName = _uniqueStockList.FirstOrDefault(item => item.StockProductData.ProductName == stockData.StockProductData.ProductName && item.SallesPrice == stockData.SallesPrice);
 
-            if (sameName == null || sameName.StockAmount < amount)
+            if (sameStockName == null || sameStockName.StockAmount < amount || sameUniqueStockName == null || sameUniqueStockName.StockAmount < amount)
                 return;
 
-            sameName.StockAmount -= amount;
+            sameStockName.StockAmount -= amount;
+            sameUniqueStockName.StockAmount -= amount;
         }
 
         public StockData GetStockData(int index)

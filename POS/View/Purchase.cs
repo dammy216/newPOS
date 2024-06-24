@@ -61,6 +61,7 @@ namespace POS.View
             }
 
                 _stockInstance.AddStock(name, amount, purchasePrice, sellesPrice);
+                _stockInstance.AddUniqueStock(name, amount, purchasePrice, sellesPrice);
                 messageText.ForeColor = Color.Green;
                 messageText.Text = "在庫に追加しました!";
             

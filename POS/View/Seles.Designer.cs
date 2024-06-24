@@ -36,6 +36,12 @@
             this.label1 = new System.Windows.Forms.Label();
             this.buyButton = new System.Windows.Forms.Button();
             this.messageText = new System.Windows.Forms.Label();
+            this.listView1 = new System.Windows.Forms.ListView();
+            this.columnHeader4 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.columnHeader5 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.columnHeader6 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.addButton = new System.Windows.Forms.Button();
+            this.removeButton = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.amountNB)).BeginInit();
             this.SuspendLayout();
             // 
@@ -71,7 +77,7 @@
             // 
             // amountNB
             // 
-            this.amountNB.Location = new System.Drawing.Point(343, 182);
+            this.amountNB.Location = new System.Drawing.Point(343, 111);
             this.amountNB.Name = "amountNB";
             this.amountNB.Size = new System.Drawing.Size(120, 19);
             this.amountNB.TabIndex = 1;
@@ -79,7 +85,7 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(341, 167);
+            this.label1.Location = new System.Drawing.Point(341, 96);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(41, 12);
             this.label1.TabIndex = 2;
@@ -87,7 +93,7 @@
             // 
             // buyButton
             // 
-            this.buyButton.Location = new System.Drawing.Point(369, 264);
+            this.buyButton.Location = new System.Drawing.Point(367, 306);
             this.buyButton.Name = "buyButton";
             this.buyButton.Size = new System.Drawing.Size(75, 23);
             this.buyButton.TabIndex = 3;
@@ -103,11 +109,62 @@
             this.messageText.Size = new System.Drawing.Size(0, 12);
             this.messageText.TabIndex = 6;
             // 
+            // listView1
+            // 
+            this.listView1.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
+            this.columnHeader4,
+            this.columnHeader5,
+            this.columnHeader6});
+            this.listView1.FullRowSelect = true;
+            this.listView1.HideSelection = false;
+            this.listView1.Location = new System.Drawing.Point(509, 79);
+            this.listView1.Name = "listView1";
+            this.listView1.Size = new System.Drawing.Size(305, 288);
+            this.listView1.TabIndex = 7;
+            this.listView1.UseCompatibleStateImageBehavior = false;
+            this.listView1.View = System.Windows.Forms.View.Details;
+            // 
+            // columnHeader4
+            // 
+            this.columnHeader4.Text = "商品名";
+            this.columnHeader4.Width = 100;
+            // 
+            // columnHeader5
+            // 
+            this.columnHeader5.Text = "値段";
+            this.columnHeader5.Width = 100;
+            // 
+            // columnHeader6
+            // 
+            this.columnHeader6.Text = "販売数";
+            this.columnHeader6.Width = 100;
+            // 
+            // addButton
+            // 
+            this.addButton.Location = new System.Drawing.Point(367, 149);
+            this.addButton.Name = "addButton";
+            this.addButton.Size = new System.Drawing.Size(75, 23);
+            this.addButton.TabIndex = 8;
+            this.addButton.Text = "追加";
+            this.addButton.UseVisualStyleBackColor = true;
+            // 
+            // removeButton
+            // 
+            this.removeButton.Location = new System.Drawing.Point(367, 191);
+            this.removeButton.Name = "removeButton";
+            this.removeButton.Size = new System.Drawing.Size(75, 23);
+            this.removeButton.TabIndex = 9;
+            this.removeButton.Text = "削除";
+            this.removeButton.UseVisualStyleBackColor = true;
+            // 
             // Seles
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(499, 408);
+            this.ClientSize = new System.Drawing.Size(873, 408);
+            this.Controls.Add(this.removeButton);
+            this.Controls.Add(this.addButton);
+            this.Controls.Add(this.listView1);
             this.Controls.Add(this.messageText);
             this.Controls.Add(this.buyButton);
             this.Controls.Add(this.label1);
@@ -131,5 +188,11 @@
         private System.Windows.Forms.Label messageText;
         private System.Windows.Forms.ColumnHeader columnHeader2;
         private System.Windows.Forms.ColumnHeader columnHeader3;
+        private System.Windows.Forms.ListView listView1;
+        private System.Windows.Forms.ColumnHeader columnHeader4;
+        private System.Windows.Forms.ColumnHeader columnHeader5;
+        private System.Windows.Forms.ColumnHeader columnHeader6;
+        private System.Windows.Forms.Button addButton;
+        private System.Windows.Forms.Button removeButton;
     }
 }
