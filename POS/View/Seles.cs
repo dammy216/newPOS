@@ -17,6 +17,7 @@ namespace POS.View
     {
         private StockManager _stockInstance = StockManager.GetInstance();
         private SelesManager _selesInstance = SelesManager.GetInstance();
+        private CartManager _cartInstance = CartManager.GetInstance();
         public Seles()
         {
             InitializeComponent();
@@ -39,36 +40,61 @@ namespace POS.View
             }
         }
 
-
-        private void buyButton_Click(object sender, EventArgs e)
+        private void DisplayCartListView()
         {
-            if(salesListView.SelectedItems.Count == 0)
+            cartListView.Items.Clear();
+
+            foreach(var cart in _cartInstance.CartList)
+            {
+                var cartList = _cartInstance.DisplayCartList(cart);
+
+                if(cartList == null)
+                    continue;
+                
+                ListViewItem item = new ListViewItem(cartList);
+                cartListView.Items.Add(item);
+            }
+        }
+
+        private void addButton_Click(object sender, EventArgs e)
+        {
+            if (salesListView.SelectedItems.Count == 0)
             {
                 messageText.ForeColor = Color.Red;
                 messageText.Text = "商品が選択されていません";
                 return;
             }
-            else if(amountNB.Value == 0)
+            else if (amountNB.Value == 0)
             {
                 messageText.ForeColor = Color.Red;
                 messageText.Text = "0の値があります";
                 return;
             }
-            else
+
+            messageText.ForeColor = Color.Green;
+            messageText.Text = "カートに追加しました！";
+
+            var productName = salesListView.SelectedItems[0].Text;
+            var amount = (int)amountNB.Value;
+
+            _cartInstance.AddCart(productName, amount);
+            _stockInstance.SellesFromStock(productName, amount);
+            DisplayCartListView();
+            DisplaySelesListView();
+
+            amountNB.Value = 0;
+        }
+
+        private void buyButton_Click(object sender, EventArgs e)
+        {
+            foreach(var cart in  _cartInstance.CartList)
             {
-                messageText.ForeColor = Color.Green;
-                messageText.Text = "商品を購入しました！";
-
-                var amount = (int)amountNB.Value;
-                var selectStockData = _stockInstance.GetStockData(salesListView.SelectedItems[0].Index);
-
-                _selesInstance.AddSeles(selectStockData, amount);
-                _stockInstance.SellesFromStock(selectStockData, amount);
-
-                DisplaySelesListView();
+                var stockData = _stockInstance.GetStockData(cart.Name);
+                _selesInstance.AddSeles(stockData, cart.Amount);
+            }
+                _cartInstance.CartList.Clear();
+                DisplayCartListView();
                 DialogResult = DialogResult.OK;
-                amountNB.Value = 0;
-            };
         }
     }
 }

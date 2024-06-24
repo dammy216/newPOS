@@ -1,4 +1,5 @@
 ﻿using POS.Model.Model;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Runtime.InteropServices;
@@ -31,19 +32,21 @@ namespace POS.Model.Managers
         public void AddStock(string stockName, int stockAmount, int purchasePrice, int sallesPrice)
         {
             var productData = new ProductData(stockName);
-            var stockData = new StockData(productData, stockAmount, purchasePrice, sallesPrice);
+            var date = DateTime.Now.ToString("yyyy-MM-dd HH-mm-ss");
+            var stockData = new StockData(productData,date, stockAmount, purchasePrice, sallesPrice);
             _stockList.Add(stockData);
         }
 
         //重複不可能なストックリストに格納する
         public void AddUniqueStock(string stockName, int stockAmount, int purchasePrice, int sallesPrice)
         {
-            var sameProduct = _uniqueStockList.FirstOrDefault(item => item.StockProductData.ProductName == stockName && item.SallesPrice == sallesPrice);
+            var sameProduct = _uniqueStockList.FirstOrDefault(item => item.StockProductData.ProductName == stockName);
 
             if(sameProduct == null)
             {
                 var productData = new ProductData(stockName);
-                var stockData = new StockData(productData, stockAmount, purchasePrice, sallesPrice);
+                var date = DateTime.Now.ToString("yyyy-MM-dd HH-mm-ss");
+                var stockData = new StockData(productData,date, stockAmount, purchasePrice, sallesPrice);
                 _uniqueStockList.Add(stockData);
             }
             else
@@ -64,17 +67,16 @@ namespace POS.Model.Managers
             return stocks;
         }
 
-        //販売画面の表示用
+        //販売画面の表示用(重複なし在庫)
         public string[] DisplaySelesList(StockData selesItem)
         {
             if (selesItem.StockAmount == 0)
                 return null;
 
             var name = selesItem.StockProductData.ProductName;
-            var price = selesItem.SallesPrice.ToString();
             var amount = selesItem.StockAmount.ToString();
 
-            string[] selesItems = { name, price, amount };
+            string[] selesItems = { name, amount };
             return selesItems;
         }
 
@@ -94,24 +96,18 @@ namespace POS.Model.Managers
             return false;
         }
 
-        public void SellesFromStock(StockData stockData, int amount)
+        public void SellesFromStock(string productName, int amount)
         {
-            if (amount < 0)
-                return;
-
-            var sameStockName = _stockList.FirstOrDefault(item => item == stockData);
-            var sameUniqueStockName = _uniqueStockList.FirstOrDefault(item => item.StockProductData.ProductName == stockData.StockProductData.ProductName && item.SallesPrice == stockData.SallesPrice);
-
-            if (sameStockName == null || sameStockName.StockAmount < amount || sameUniqueStockName == null || sameUniqueStockName.StockAmount < amount)
-                return;
-
-            sameStockName.StockAmount -= amount;
-            sameUniqueStockName.StockAmount -= amount;
+            var stockItem = _uniqueStockList.FirstOrDefault(item => item.StockProductData.ProductName == productName);
+            if (stockItem != null)
+            {
+                stockItem.StockAmount -= amount;
+            }
         }
 
-        public StockData GetStockData(int index)
+        public StockData GetStockData(string name)
         {
-            return _stockList[index];
+            return _uniqueStockList.FirstOrDefault(item => item.StockProductData.ProductName.Equals(name));
         }
     }
 }

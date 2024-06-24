@@ -30,18 +30,16 @@
         {
             this.salesListView = new System.Windows.Forms.ListView();
             this.columnHeader1 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.columnHeader2 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.columnHeader3 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.amountNB = new System.Windows.Forms.NumericUpDown();
             this.label1 = new System.Windows.Forms.Label();
             this.buyButton = new System.Windows.Forms.Button();
             this.messageText = new System.Windows.Forms.Label();
-            this.listView1 = new System.Windows.Forms.ListView();
+            this.cartListView = new System.Windows.Forms.ListView();
             this.columnHeader4 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.columnHeader5 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.columnHeader6 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.addButton = new System.Windows.Forms.Button();
             this.removeButton = new System.Windows.Forms.Button();
+            this.columnHeader7 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.columnHeader2 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             ((System.ComponentModel.ISupportInitialize)(this.amountNB)).BeginInit();
             this.SuspendLayout();
             // 
@@ -49,8 +47,7 @@
             // 
             this.salesListView.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
             this.columnHeader1,
-            this.columnHeader2,
-            this.columnHeader3});
+            this.columnHeader7});
             this.salesListView.FullRowSelect = true;
             this.salesListView.HideSelection = false;
             this.salesListView.Location = new System.Drawing.Point(12, 79);
@@ -63,17 +60,7 @@
             // columnHeader1
             // 
             this.columnHeader1.Text = "商品名";
-            this.columnHeader1.Width = 100;
-            // 
-            // columnHeader2
-            // 
-            this.columnHeader2.Text = "値段";
-            this.columnHeader2.Width = 100;
-            // 
-            // columnHeader3
-            // 
-            this.columnHeader3.Text = "在庫数";
-            this.columnHeader3.Width = 100;
+            this.columnHeader1.Width = 200;
             // 
             // amountNB
             // 
@@ -109,35 +96,24 @@
             this.messageText.Size = new System.Drawing.Size(0, 12);
             this.messageText.TabIndex = 6;
             // 
-            // listView1
+            // cartListView
             // 
-            this.listView1.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
+            this.cartListView.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
             this.columnHeader4,
-            this.columnHeader5,
-            this.columnHeader6});
-            this.listView1.FullRowSelect = true;
-            this.listView1.HideSelection = false;
-            this.listView1.Location = new System.Drawing.Point(509, 79);
-            this.listView1.Name = "listView1";
-            this.listView1.Size = new System.Drawing.Size(305, 288);
-            this.listView1.TabIndex = 7;
-            this.listView1.UseCompatibleStateImageBehavior = false;
-            this.listView1.View = System.Windows.Forms.View.Details;
+            this.columnHeader2});
+            this.cartListView.FullRowSelect = true;
+            this.cartListView.HideSelection = false;
+            this.cartListView.Location = new System.Drawing.Point(509, 79);
+            this.cartListView.Name = "cartListView";
+            this.cartListView.Size = new System.Drawing.Size(305, 288);
+            this.cartListView.TabIndex = 7;
+            this.cartListView.UseCompatibleStateImageBehavior = false;
+            this.cartListView.View = System.Windows.Forms.View.Details;
             // 
             // columnHeader4
             // 
             this.columnHeader4.Text = "商品名";
-            this.columnHeader4.Width = 100;
-            // 
-            // columnHeader5
-            // 
-            this.columnHeader5.Text = "値段";
-            this.columnHeader5.Width = 100;
-            // 
-            // columnHeader6
-            // 
-            this.columnHeader6.Text = "販売数";
-            this.columnHeader6.Width = 100;
+            this.columnHeader4.Width = 200;
             // 
             // addButton
             // 
@@ -147,6 +123,7 @@
             this.addButton.TabIndex = 8;
             this.addButton.Text = "追加";
             this.addButton.UseVisualStyleBackColor = true;
+            this.addButton.Click += new System.EventHandler(this.addButton_Click);
             // 
             // removeButton
             // 
@@ -157,6 +134,16 @@
             this.removeButton.Text = "削除";
             this.removeButton.UseVisualStyleBackColor = true;
             // 
+            // columnHeader7
+            // 
+            this.columnHeader7.Text = "販売数";
+            this.columnHeader7.Width = 100;
+            // 
+            // columnHeader2
+            // 
+            this.columnHeader2.Text = "販売数";
+            this.columnHeader2.Width = 100;
+            // 
             // Seles
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
@@ -164,7 +151,7 @@
             this.ClientSize = new System.Drawing.Size(873, 408);
             this.Controls.Add(this.removeButton);
             this.Controls.Add(this.addButton);
-            this.Controls.Add(this.listView1);
+            this.Controls.Add(this.cartListView);
             this.Controls.Add(this.messageText);
             this.Controls.Add(this.buyButton);
             this.Controls.Add(this.label1);
@@ -186,13 +173,11 @@
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Button buyButton;
         private System.Windows.Forms.Label messageText;
-        private System.Windows.Forms.ColumnHeader columnHeader2;
-        private System.Windows.Forms.ColumnHeader columnHeader3;
-        private System.Windows.Forms.ListView listView1;
+        private System.Windows.Forms.ListView cartListView;
         private System.Windows.Forms.ColumnHeader columnHeader4;
-        private System.Windows.Forms.ColumnHeader columnHeader5;
-        private System.Windows.Forms.ColumnHeader columnHeader6;
         private System.Windows.Forms.Button addButton;
         private System.Windows.Forms.Button removeButton;
+        private System.Windows.Forms.ColumnHeader columnHeader7;
+        private System.Windows.Forms.ColumnHeader columnHeader2;
     }
 }

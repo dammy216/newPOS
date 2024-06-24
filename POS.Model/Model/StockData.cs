@@ -14,10 +14,10 @@ namespace POS.Model.Model
         public int SallesPrice {  get; set; }
         public int StockAmount { get; set; }
 
-        public StockData(ProductData product, int stockAmount ,int purchasePrice, int sallesPrice )
+        public StockData(ProductData product,string dete, int stockAmount ,int purchasePrice, int sallesPrice )
         {
             StockProductData = product;
-            PurchaseDate = DateTime.Today.ToString("yyyy-MM-dd");
+            PurchaseDate = dete;
             PurchasePrice = purchasePrice;
             SallesPrice = sallesPrice;
             StockAmount = stockAmount;

@@ -45,6 +45,7 @@
     <Compile Include="Managers\ProductManager.cs" />
     <Compile Include="Managers\SelesManager.cs" />
     <Compile Include="Managers\StockManager.cs" />
+    <Compile Include="Model\CartData.cs" />
     <Compile Include="Model\ProductData.cs" />
     <Compile Include="Model\SalledData.cs" />
     <Compile Include="Model\StockData.cs" />

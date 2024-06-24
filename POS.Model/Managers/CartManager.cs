@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net.Http.Headers;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -9,8 +10,8 @@ namespace POS.Model.Managers
 {
     public class CartManager
     {
-        private List<SalledData> _salledList = new List<SalledData>();
-        public List<SalledData> SalledList { get { return _salledList; } }
+        private List<CartData> _cartList = new List<CartData>();
+        public List<CartData> CartList { get { return _cartList; } }
         private static CartManager _instance;
 
         private CartManager()
@@ -27,13 +28,28 @@ namespace POS.Model.Managers
             return _instance;
         }
 
-        public string[] DisplayCartList(SalledData cartItem)
+        public void AddCart(string productName, int productAmount)
         {
-            var name = cartItem.ProductName;
-            var amount = cartItem.AddproductAmount.ToString();
+            var sameProduct = _cartList.FirstOrDefault(item => item.Name == productName);
 
-            string[] cartItems = { name, amount };
-            return cartItems;
+            if (sameProduct != null)
+            {
+                sameProduct.Amount += productAmount;
+            }
+            else
+            {
+                var cart = new CartData(productName, productAmount);
+                _cartList.Add(cart);
+            }
+        }
+
+        public string[] DisplayCartList(CartData cart)
+        {
+            var name = cart.Name;
+            var amount = cart.Amount.ToString();
+
+            string[] cartrItems = { name, amount };
+            return cartrItems;
         }
     }
 }

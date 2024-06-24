@@ -29,8 +29,23 @@ namespace POS.Model.Managers
 
         public void AddSeles(StockData stockData, int salledAmount)
         {
-            var salledData = new SalledData(stockData, salledAmount);
-            _salledList.Add(salledData);
+            var existingSalledData = _salledList.FirstOrDefault(item => item.StockData.Equals(stockData));
+
+            if (existingSalledData != null)
+            {
+                // If exists, add the salledAmount to the existing amount
+                existingSalledData.SalledAmount += salledAmount;
+                existingSalledData.SalledSubTotal += stockData.SallesPrice * salledAmount;
+            }
+            else
+            {
+                // If not, create a new SalledData and add it to the list
+                var salledData = new SalledData(stockData, salledAmount);
+                _salledList.Add(salledData);
+            }
+
+            // Order the list by PurchaseDate
+            _salledList = _salledList.OrderBy(item => item.StockData.PurchaseDate).ToList();
         }
 
         //"総"売り上げ金額を求める
